@@ -4,7 +4,8 @@ pipeline {
     agent {
         docker {
             image 'php:8.1-cli' // Image untuk Composer dan PHPUnit
-            args '-u root:root' // Jalankan sebagai root untuk menghindari masalah permission
+            // Menambahkan argumen untuk memungkinkan akses ke Docker daemon dan binary Docker dari host
+            args '-u root:root -v /var/run/docker.sock:/var/run/docker.sock -v /usr/bin/docker:/usr/bin/docker'
         }
     }
 
